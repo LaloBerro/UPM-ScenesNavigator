@@ -1,3 +1,3 @@
-# Unity Package Template
+# Scenes Navigator Editor Windows
 
-This is a template for an empty unity package
+To opne this windows go to Tools>SceneSelector
