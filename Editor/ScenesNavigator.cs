@@ -50,11 +50,9 @@ namespace ScenesNavigators.Core
 
         private void DrawSearchBar()
         {
-            GUILayout.BeginHorizontal("Box");
+            GUILayout.BeginHorizontal();
 
-            GUILayout.Box(EditorGUIUtility.IconContent("d_search_icon"), GUILayout.Width(18), GUILayout.Height(18));
-
-            _sceneToSearch = GUILayout.TextField(_sceneToSearch, EditorStyles.helpBox);
+            _sceneToSearch = GUILayout.TextField(_sceneToSearch, new GUIStyle("ToolbarSeachTextField"));
 
             if (_sceneToSearch != "")
             {
@@ -112,7 +110,7 @@ namespace ScenesNavigators.Core
             {
                 GUILayout.Space(5);
 
-                if (GUILayout.Button(GetSceneName(EditorBuildSettings.scenes[i].path)))
+                if (GUILayout.Button(GetSceneName(EditorBuildSettings.scenes[i].path), EditorStyles.toolbarButton))
                 {
                     if (_useMultiScene)
                         EditorSceneManager.OpenScene(EditorBuildSettings.scenes[i].path, OpenSceneMode.Additive);
