@@ -1,28 +1,19 @@
 {
-  "name": "com..",
+  "name": "com.lalo.scenesnavigator",
   "version": "1.0.0",
-  "displayName": "",
+  "displayName": "ScenesNavigator",
   "description": "",
   "unity": "2020.3",
   "unityRelease": "0b5",
   "documentationUrl": "",
   "changelogUrl": "",
   "licensesUrl": "",
-  "keywords": [
-  ],
+  "keywords": [],
   "author": {
-    "name": "",
+    "name": "Lalo",
     "email": "",
     "url": ""
   },
   "type": "tool",
-  "hideInEditor": false,
-  "samples": 
-[
-	{
-		"displayName": "Samples",
-		"description": "",
-		"path": "Samples~/"
-	}
-]
+  "hideInEditor": false
 }
