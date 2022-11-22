@@ -1,3 +1,3 @@
 # Scenes Navigator Editor Windows
 
-To opne this windows go to Tools>SceneSelector
+To open this windows go to Tools>SceneSelector
