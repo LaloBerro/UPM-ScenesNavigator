@@ -12,10 +12,18 @@ namespace ScenesNavigators.Core
         private string _sceneToSearch = "";
         private bool _isOptionsActivated;
 
+        private GUIStyle _sceneButtonStyle;
+
         [MenuItem("Tools/ScenesNavigator")]
         private static void ShowWindow()
         {
             EditorWindow.GetWindow(typeof(ScenesNavigator), false, "Scenes Navigator");
+        }
+
+        private void OnEnable()
+        {
+            _sceneButtonStyle = new GUIStyle(EditorStyles.toolbarButton);
+            _sceneButtonStyle.fontSize = 10;
         }
 
         private void OnGUI()
@@ -74,7 +82,7 @@ namespace ScenesNavigators.Core
 
                     GUILayout.Space(5);
 
-                    if (GUILayout.Button(GetSceneName(EditorBuildSettings.scenes[i].path)))
+                    if (GUILayout.Button(GetSceneName(EditorBuildSettings.scenes[i].path), _sceneButtonStyle))
                     {
                         if (_useMultiScene)
                             EditorSceneManager.OpenScene(EditorBuildSettings.scenes[i].path, OpenSceneMode.Additive);
@@ -110,7 +118,7 @@ namespace ScenesNavigators.Core
             {
                 GUILayout.Space(5);
 
-                if (GUILayout.Button(GetSceneName(EditorBuildSettings.scenes[i].path), EditorStyles.toolbarButton))
+                if (GUILayout.Button(GetSceneName(EditorBuildSettings.scenes[i].path), _sceneButtonStyle))
                 {
                     if (_useMultiScene)
                         EditorSceneManager.OpenScene(EditorBuildSettings.scenes[i].path, OpenSceneMode.Additive);
