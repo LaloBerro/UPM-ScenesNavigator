@@ -13,6 +13,7 @@ namespace ScenesNavigators.Core
         private bool _isOptionsActivated;
 
         private GUIStyle _sceneButtonStyle;
+        private GUIStyle _foldoutStyle;
 
         [MenuItem("Tools/ScenesNavigator")]
         private static void ShowWindow()
@@ -24,6 +25,9 @@ namespace ScenesNavigators.Core
         {
             _sceneButtonStyle = new GUIStyle(EditorStyles.toolbarButton);
             _sceneButtonStyle.fontSize = 10;
+
+            _foldoutStyle = new GUIStyle(EditorStyles.foldoutHeader);
+            _foldoutStyle.fontSize = 10;
         }
 
         private void OnGUI()
@@ -37,7 +41,7 @@ namespace ScenesNavigators.Core
         {
             GUILayout.BeginVertical("Box");
 
-            _isOptionsActivated = EditorGUILayout.BeginFoldoutHeaderGroup(_isOptionsActivated, "Options");
+            _isOptionsActivated = EditorGUILayout.BeginFoldoutHeaderGroup(_isOptionsActivated, "Options", _foldoutStyle);
 
             if (_isOptionsActivated)
             {
