@@ -21,15 +21,6 @@ namespace ScenesNavigators.Core
             EditorWindow.GetWindow(typeof(ScenesNavigator), false, "Scenes Navigator");
         }
 
-        private void OnEnable()
-        {
-            _sceneButtonStyle = new GUIStyle(EditorStyles.toolbarButton);
-            _sceneButtonStyle.fontSize = 10;
-
-            _foldoutStyle = new GUIStyle(EditorStyles.foldoutHeader);
-            _foldoutStyle.fontSize = 10;
-        }
-
         private void OnGUI()
         {
             DrawOptions();
@@ -40,6 +31,9 @@ namespace ScenesNavigators.Core
         private void DrawOptions()
         {
             GUILayout.BeginVertical("Box");
+
+            _foldoutStyle = new GUIStyle(EditorStyles.foldoutHeader);
+            _foldoutStyle.fontSize = 10;
 
             _isOptionsActivated = EditorGUILayout.BeginFoldoutHeaderGroup(_isOptionsActivated, "Options", _foldoutStyle);
 
@@ -62,6 +56,9 @@ namespace ScenesNavigators.Core
 
         private void DrawSearchBar()
         {
+            _sceneButtonStyle = new GUIStyle(EditorStyles.toolbarButton);
+            _sceneButtonStyle.fontSize = 10;
+
             GUILayout.BeginHorizontal();
 
             _sceneToSearch = GUILayout.TextField(_sceneToSearch, new GUIStyle("ToolbarSeachTextField"));
@@ -118,6 +115,9 @@ namespace ScenesNavigators.Core
 
         private void DrawAllScenes()
         {
+            _sceneButtonStyle = new GUIStyle(EditorStyles.toolbarButton);
+            _sceneButtonStyle.fontSize = 10;
+
             for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
             {
                 GUILayout.Space(5);
