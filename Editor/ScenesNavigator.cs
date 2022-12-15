@@ -8,6 +8,7 @@ namespace ScenesNavigators.Core
     {
         private Vector2 _scrollPosition;
         private bool _useMultiScene;
+        private bool _hasToSelectOnProjectView = true;
 
         private string _sceneToSearch = "";
         private bool _isOptionsActivated;
@@ -43,6 +44,13 @@ namespace ScenesNavigators.Core
 
                 GUILayout.Label("Open Additive");
                 _useMultiScene = EditorGUILayout.Toggle("", _useMultiScene);
+
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+
+                GUILayout.Label("Select on project");
+                _hasToSelectOnProjectView = EditorGUILayout.Toggle("", _hasToSelectOnProjectView);
 
                 GUILayout.EndHorizontal();
 
@@ -83,21 +91,11 @@ namespace ScenesNavigators.Core
 
                     GUILayout.Space(5);
 
-                    if (GUILayout.Button(GetSceneName(EditorBuildSettings.scenes[i].path), _sceneButtonStyle))
-                    {
-                        if (_useMultiScene)
-                            EditorSceneManager.OpenScene(EditorBuildSettings.scenes[i].path, OpenSceneMode.Additive);
-                        else
-                        {
-                            EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-                            EditorSceneManager.OpenScene(EditorBuildSettings.scenes[i].path);
-                        }
-                    }
+                    DrawSceneButton(EditorBuildSettings.scenes[i].path);
                 }
 
                 GUILayout.EndVertical();
             }
-
         }
 
         private void DrawScenesList()
@@ -122,16 +120,28 @@ namespace ScenesNavigators.Core
             {
                 GUILayout.Space(5);
 
-                if (GUILayout.Button(GetSceneName(EditorBuildSettings.scenes[i].path), _sceneButtonStyle))
+                DrawSceneButton(EditorBuildSettings.scenes[i].path);
+            }
+        }
+
+        private void DrawSceneButton(string path)
+        {
+            if (GUILayout.Button(GetSceneName(path), _sceneButtonStyle))
+            {
+                if (_useMultiScene)
+                    EditorSceneManager.OpenScene(path, OpenSceneMode.Additive);
+                else
                 {
-                    if (_useMultiScene)
-                        EditorSceneManager.OpenScene(EditorBuildSettings.scenes[i].path, OpenSceneMode.Additive);
-                    else
-                    {
-                        EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-                        EditorSceneManager.OpenScene(EditorBuildSettings.scenes[i].path);
-                    }
+                    EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+                    EditorSceneManager.OpenScene(path);
                 }
+
+                if (!_hasToSelectOnProjectView)
+                    return;
+
+                UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(path, typeof(UnityEngine.Object));
+                Selection.activeObject = obj;
+                EditorGUIUtility.PingObject(obj);
             }
         }
 
